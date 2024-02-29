@@ -4,8 +4,8 @@ import { BlogList } from "@/static/content";
 const RecentPost = () => {
   return (
     <>
-        {BlogList.map((blogs) => (
-          <div className="flex flex-col gap-4 lg:gap-8 lg:max-w-5xl">
+        {BlogList.map((blogs, idx) => (
+          <div key={idx} className="flex flex-col gap-4 lg:gap-8 lg:max-w-5xl">
             {blogs.recent &&
               <>
                 <h1 className="font-bold text-3xl lg:text-4xl">Recent Post</h1>
@@ -42,8 +42,8 @@ const RecentPost = () => {
                         </div>
                         <div className="flex gap-2 items-center flex-wrap">
                           <p>Tags:</p>
-                          {blogs.tags.map((tag) => (
-                            <p className="border border-orange-200 py-2 px-4 text-sm">{tag}</p>
+                          {blogs.tags.map((tag, idx) => (
+                            <p key={idx} className="border border-orange-200 py-2 px-4 text-sm">{tag}</p>
                           ))}
                         </div>
                       </div>

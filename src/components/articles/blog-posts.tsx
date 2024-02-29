@@ -6,10 +6,10 @@ const BlogPosts = () => {
     <div className="mt-16">
       <h1 className="font-bold text-3xl lg:text-4xl">Articles</h1>
       <div className="flex flex-col gap-4 mt-16 lg:flex-row lg:gap-10 lg:max-w-5xl">
-        {BlogList.map((blogs) => (
+        {BlogList.map((blogs, idx) => (
           <>
             {blogs.recent == false ? (
-              <div className="flex flex-col gap-4 cursor-pointer">
+              <div key={idx} className="flex flex-col gap-4 cursor-pointer">
                 <div className="flex items-center gap-4 mt-6">
                   <div>
                     <Image src={blogs.author} width={40} alt="author-profile"></Image>
@@ -39,8 +39,8 @@ const BlogPosts = () => {
                   </div>
                   <div className="flex gap-2 items-center flex-wrap">
                     <p>Tags:</p>
-                    {blogs.tags.map((tag) => (
-                      <p className="border border-orange-200 py-2 px-4 text-sm">{tag}</p>
+                    {blogs.tags.map((tag, idx) => (
+                      <p key={idx} className="border border-orange-200 py-2 px-4 text-sm">{tag}</p>
                     ))}
                   </div>
                 </div>
