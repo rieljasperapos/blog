@@ -1,12 +1,19 @@
+"use client"
 import Image from "next/image";
 import { BlogList } from "@/static/content";
+import { useRouter } from "next/navigation";
 
 const RecentPost = () => {
+  const navigate = useRouter();
+
+  const handleClick = (title: string) => {
+    navigate.push(`/blogs/${title}`);
+  }
+
   return (
     <>
         {BlogList.map((blogs) => (
-          <>
-            {blogs.recent &&
+            blogs.recent &&
               <div key={blogs.id} className="flex flex-col gap-4 lg:gap-8 lg:max-w-5xl">
                 <h1 className="font-bold text-3xl lg:text-4xl">Recent Post</h1>
 
@@ -20,7 +27,7 @@ const RecentPost = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row gap-4 lg:gap-12 justify-evenly cursor-pointer">
+                <div className="flex flex-col lg:flex-row gap-4 lg:gap-12 justify-evenly cursor-pointer" onClick={() => handleClick(blogs.title)}>
                     <div>
                       <Image src={blogs.image} width={1500} alt="recent-post" className="rounded-xl" style={{ height: '100%' }} quality={75}></Image>
                     </div>
@@ -51,8 +58,6 @@ const RecentPost = () => {
                     </div>
                   </div>
               </div>
-            }
-          </>
         ))}
     </>
   );
