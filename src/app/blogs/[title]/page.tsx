@@ -17,14 +17,14 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
   return (
     <ScrollProvider>
         <MainWrapper>
-          <ResizablePanelGroup direction="horizontal" className="">
+          <ResizablePanelGroup direction="horizontal">
             <ResizablePanel defaultSize={25} className="hidden xl:flex">
               <div className="flex h-full p-6 fixed max-w-64">
                 <Blogs />
               </div>
             </ResizablePanel>
             {/* <ResizableHandle withHandle /> */}
-            <ResizablePanel defaultSize={75} className="px-16">
+            <ResizablePanel defaultSize={50} className="md:px-16">
               <div className="flex flex-col h-full gap-6 p-6">
                 <div>
                   <h1 className="font-extrabold text-3xl sm:text-5xl">{Content.title}</h1>
@@ -52,7 +52,7 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
                     }
                       <div>
                         <div className="mb-4">
-                          <Link href="#">
+                          <Link href={`#${content.header}`}>
                             <h1 className="font-bold text-xl sm:text-3xl" id={content.header}>{content.header}</h1>
                           </Link>
                         </div>
