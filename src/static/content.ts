@@ -4,9 +4,9 @@ import dsa from '../../public/datastructures.png';
 import dsadraw from '../../public/dsadraw.png';
 import discussdsa from '../../public/discussdsa.png';
 import authorProfile from '../../public/profilepic.png';
-import computerScience from '../../public/Computer-Science.png';
-import spacedRepetition from '../../public/spaced-repetition.png';
-import linux from '../../public/linux.png';
+import computerScience from '../../public/Comsci.png';
+import spacedRepetition from '../../public/spacedrep.png';
+import linux from '../../public/startLinux.png';
 
 export const Content = {
   title: "How to Ace your Data Structures and Algorithms",
@@ -62,6 +62,7 @@ export const Content = {
 
 export const BlogList = [
   {
+    id: 0,
     image: dsa,
     title: "How to Ace your Data Structures and Algorithms Class",
     description: "This article provides insights into excelling in your data structure and algorithms class, offering valuable tips and effective techniques to support your learning journey in mastering these essential foundations integral to various coding aspects.",
@@ -78,6 +79,7 @@ export const BlogList = [
     active: true,
   },
   {
+    id: 1,
     image: linux,
     title: "Start using linux as early as possible",
     description: "In this article, we'll discuss the importance of initiating your Linux exploration early in your computer science education, emphasizing the benefits of gaining proficiency in open-source environments for enhanced skill development and career readiness.",
@@ -94,6 +96,7 @@ export const BlogList = [
     active: false,
   },
   {
+    id: 2,
     image: spacedRepetition,
     title: "Spaced repetition as a study technique",
     description: "Exploring the transformative study technique of spaced repetition early in your academic journey can significantly optimize information retention, fostering a more efficient and enduring grasp of complex computer science concepts.",
@@ -110,6 +113,7 @@ export const BlogList = [
     active: false,
   },
   {
+    id: 3,
     image: computerScience,
     title: "How to min-max your CS Degree",
     description: "In this article, we'll delve into effective strategies for minimizing and maximizing your Computer Science (CS) degree, offering insights on course selection, skill development, internships, and networking. By implementing these approaches, you can navigate your academic path strategically and enhance your prospects in the competitive field of computer science like a game.",
