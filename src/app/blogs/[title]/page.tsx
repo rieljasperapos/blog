@@ -19,16 +19,19 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
     <ScrollProvider>
       <MainWrapper>
         <ResizablePanelGroup direction="horizontal">
+          {/* LEFT SIDE PANEL */}
           <ResizablePanel defaultSize={25} className="hidden xl:flex">
             <div className="fixed max-w-64">
-              <Blogs />
+              <Blogs title={title} />
             </div>
           </ResizablePanel>
           {/* <ResizableHandle withHandle /> */}
+
+          { /* CENTER PANEL */ }
           <ResizablePanel defaultSize={50} className="md:px-12">
-            {Content2.map((content) => (
+            {Content2.map((content, idx) => (
               content.title === decodeURIComponent(title) ? (
-                <div className="flex flex-col h-full gap-6 p-6">
+                <div key={idx} className="flex flex-col h-full gap-6 p-6">
                   <div>
                     <h1 className="font-extrabold text-3xl sm:text-5xl">{content.title}</h1>
                   </div>
@@ -46,6 +49,7 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
                     </div>
                   </div>
 
+                  { /* CONTENT BODY */ }
                   <div className="flex flex-col max-w-3xl gap-12">
                     <div>
                       {content.image ? (
@@ -56,16 +60,16 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
                         ""
                       )}
                       {content.contents?.map((blog, idx) => (
-                        <div className="flex flex-col">
+                        <div key={idx} className="flex flex-col">
                           {blog.body.map((body, idx) => (
-                            <div className="mt-12">
+                            <div key={idx} className="mt-12">
                               <div>
                                 <Link href={`#${body.header}`}>
                                   <h1 className="font-bold text-xl sm:text-3xl" id={body.header}>{body.header}</h1>
                                 </Link>
                               </div>
                               {body.paragraphs.map((paragraph, idx) => (
-                                <div className="flex flex-col">
+                                <div key={idx} className="flex flex-col">
                                   <p className="font-light my-4">{paragraph.paragraph}</p>
                                   {paragraph.image ? (
                                     <Image src={paragraph.image} width={768} alt="Body Image" />
@@ -112,10 +116,12 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
                 ))} */}
         </ResizablePanel>
         {/* <ResizableHandle withHandle /> */}
+
+        { /* RIGHT PANEL */ }
         <ResizablePanel defaultSize={25} className="hidden xl:flex">
           {Content2.map((content, idx) => (
             content.title === decodeURIComponent(title) ? (
-              <div className="ml-8 fixed max-w-64">
+              <div key={idx} className="ml-8 fixed max-w-64">
                 <Navigation title={content.title} />
               </div>
             ) : (

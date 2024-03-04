@@ -15,7 +15,7 @@ const Navigation: React.FC<BlogProps> = ({ title }) => {
     <nav>
       {Content2.map((content, idx) => (
         content.title === decodeURIComponent(title) ? (
-          <div>
+          <div key={idx}>
             <div className="mb-4">
               <h1 className="font-semibold">{content.title}</h1>
             </div>
