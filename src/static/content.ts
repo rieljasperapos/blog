@@ -10,8 +10,10 @@ import linux from '../../public/startLinux.png';
 
 export const Content2 = [
   {
+    id: 0,
     title: "How to Ace your Data Structures and Algorithms Class",
     author: "RJ Gwapo",
+    profile: authorProfile,
     description: "This article provides insights into excelling in your data structure and algorithms class, offering valuable tips and effective techniques to support your learning journey in mastering these essential foundations integral to various coding aspects.",
     readDuration: "69 mins read",
     date: "February 10, 2024",
@@ -121,11 +123,52 @@ export const Content2 = [
     ]
   },
   {
+    id: 1,
     title: "Spaced Repetion as a study technique",
     author: "RJ Gwapo",
-    description: "Article about study technique to survive college",
+    profile: authorProfile,
+    description: "Exploring the transformative study technique of spaced repetition early in your academic journey can significantly optimize information retention, fostering a more efficient and enduring grasp of complex computer science concepts.",
     readDuration: "6 mins read",
-    image: spacedRepetition
+    date: "February 24, 2024",
+    image: spacedRepetition,
+    tags: [
+      "Education",
+      "Learning Techniques",
+      "Study Tips"
+    ],
+    recent: false
+  },
+  {
+    id: 2,
+    title: "The advantages of using Linux",
+    author: "RJ Gwapo",
+    profile: authorProfile,
+    description: "In this article, we'll discuss the importance of initiating your Linux exploration early in your computer science education, emphasizing the benefits of gaining proficiency in open-source environments for enhanced skill development and career readiness.",
+    readDuration: "6 mins read",
+    date: "February 25, 2024",
+    image: linux,
+    tags: [
+      "Operating Systems",
+      "Computer Science",
+      "Open Source"
+    ],
+    recent: false
+  },
+  {
+    id: 3,
+    title: "How to min-max your CS Degree",
+    author: "RJ Gwapo",
+    profile: authorProfile,
+    description: "In this article, we'll delve into effective strategies for minimizing and maximizing your Computer Science (CS) degree, offering insights on course selection, skill development, internships, and networking. By implementing these approaches, you can navigate your academic path strategically and enhance your prospects in the competitive field of computer science like a game.",
+    readDuration: "6 mins read",
+    date: "February 26, 2024",
+    image: computerScience,
+    tags: [
+      "Computer Science",
+      "Optimization",
+      "Career Development"
+    ],
+    recent: false
   }
 ]
 

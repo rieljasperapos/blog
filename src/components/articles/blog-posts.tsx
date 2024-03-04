@@ -1,21 +1,27 @@
 import Image from "next/image";
-import { BlogList } from "@/static/content";
+import { Content2 } from "@/static/content";
+import { useRouter } from "next/navigation";
 
 const BlogPosts = () => {
+  const navigate = useRouter();
+  const handleClick = (title: string) => {
+    navigate.push(`blogs/${title}`);
+  }
+
   return (
     <div className="mt-16 lg:mt-24">
       <h1 className="font-bold text-3xl lg:text-4xl">Articles</h1>
       <div className="grid flex-col gap-4 mt-16 lg:grid-cols-3 lg:gap-10 lg:max-w-5xl">
-        {BlogList.map((blogs) => (
+        {Content2.map((blogs) => (
             blogs.recent == false ? (
-              <div key={blogs.id} className="flex flex-col gap-4 cursor-pointer">
+              <div key={blogs.id} className="flex flex-col gap-4 cursor-pointer" onClick={() => handleClick(blogs.title)}>
                 <div className="flex items-center gap-4 mt-6">
                   <div>
-                    <Image src={blogs.author} width={40} alt="author-profile"></Image>
+                    <Image src={blogs.profile} width={40} alt="author-profile"></Image>
                   </div>
                   <div>
-                    <p className="font-bold text-orange-500">{blogs.authorName}</p>
-                    <p className="text-sm">{blogs.publishedDate}</p>
+                    <p className="font-bold text-orange-500">{blogs.author}</p>
+                    <p className="text-sm">{blogs.date}</p>
                   </div>
                 </div>
 
@@ -34,7 +40,7 @@ const BlogPosts = () => {
                 
                 <div className="flex flex-col gap-4">
                   <div>
-                    <span className="font-light text-sm">{blogs.readLength}</span>
+                    <span className="font-light text-sm">{blogs.readDuration}</span>
                   </div>
                   <div className="flex gap-2 items-center flex-wrap">
                     <p>Tags:</p>
