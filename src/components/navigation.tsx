@@ -14,7 +14,7 @@ const Navigation: React.FC<BlogProps> = ({ title }) => {
   return (
     <nav>
       {Content2.map((content, idx) => (
-        content.title === decodeURIComponent(title) ? (
+        content.title === title.replaceAll("-", " ") ? (
           <div key={idx}>
             <div className="mb-4">
               <h1 className="font-semibold">{content.title}</h1>

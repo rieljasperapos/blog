@@ -10,7 +10,7 @@ interface BlogProps {
 const Blogs: React.FC<BlogProps> = ({ title }) => {
   const navigate = useRouter();
   const handleClick = (title: string) => {
-    navigate.push(`${title}`)
+    navigate.push(`${title.replaceAll(" ", "-")}`)
   }
   return (
     <>
@@ -20,7 +20,7 @@ const Blogs: React.FC<BlogProps> = ({ title }) => {
           {Content2.map((blog, idx) => (
             <li 
               key={idx} 
-              className={`${blog.title === decodeURIComponent(title) ? "text-orange-500" : ""} mb-4 hover:text-orange-500 hover:underline`}
+              className={`${blog.title === title.replaceAll("-", " ") ? "text-orange-500" : ""} mb-4 hover:text-orange-500 hover:underline`}
               onClick={() => handleClick(blog.title)}
               >
                 {blog.title}

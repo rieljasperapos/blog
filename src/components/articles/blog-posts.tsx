@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const BlogPosts = () => {
   const navigate = useRouter();
   const handleClick = (title: string) => {
-    navigate.push(`blogs/${title}`);
+    navigate.push(`blogs/${title.replaceAll(" ", "-")}`);
   }
 
   return (
