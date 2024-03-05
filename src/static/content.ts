@@ -6,6 +6,9 @@ import discussdsa from '../../public/discussdsa.png';
 import authorProfile from '../../public/profilepic.png';
 import computerScience from '../../public/Comsci.png';
 import spacedRepetition from '../../public/spacedrep.png';
+import headerSpacedRep from '../../public/spaced-repetition.png';
+import headerLinux from '../../public/linux.png';
+import headerComputerScience from '../../public/Computer-Science.png';
 import linux from '../../public/startLinux.png';
 
 export const Content2 = [
@@ -16,8 +19,9 @@ export const Content2 = [
     profile: authorProfile,
     description: "This article provides insights into excelling in your data structure and algorithms class, offering valuable tips and effective techniques to support your learning journey in mastering these essential foundations integral to various coding aspects.",
     readDuration: "69 mins read",
-    date: "February 10, 2024",
+    date: "February 27, 2024",
     image: dsa,
+    headerImage: dsa,
     contents: [
       {
         body: [
@@ -131,6 +135,7 @@ export const Content2 = [
     readDuration: "6 mins read",
     date: "February 24, 2024",
     image: spacedRepetition,
+    headerImage: headerSpacedRep,
     tags: [
       "Education",
       "Learning Techniques",
@@ -147,6 +152,7 @@ export const Content2 = [
     readDuration: "6 mins read",
     date: "February 25, 2024",
     image: linux,
+    headerImage: headerLinux,
     tags: [
       "Operating Systems",
       "Computer Science",
@@ -163,6 +169,7 @@ export const Content2 = [
     readDuration: "6 mins read",
     date: "February 26, 2024",
     image: computerScience,
+    headerImage: headerComputerScience,
     tags: [
       "Computer Science",
       "Optimization",
