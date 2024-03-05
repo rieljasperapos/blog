@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 const MainWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="lg:mx-32">
+    <div className="items-center justify-center flex">
       {children}
     </div>
   )
