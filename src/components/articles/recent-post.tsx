@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image";
 import { BlogList } from "@/static/content";
+import { Content2 } from "@/static/content";
 import { useRouter } from "next/navigation";
 import { IBlog } from "@/types/blog-type";
 import { useEffect, useState } from "react";
@@ -42,25 +43,25 @@ const RecentPost = () => {
   // }, [])
 
   const handleClick = (title: string) => {
-    navigate.push(`/blogs/${title}`);
+    navigate.push(`/blogs/${title.replaceAll(" ", "-")}`);
   }
 
   console.log(recentBlog);
 
   return (
     <>
-        {BlogList.map((blogs) => (
+        {Content2.map((blogs) => (
             blogs.recent &&
               <div key={blogs.id} className="flex flex-col gap-4 lg:gap-8 lg:max-w-5xl">
                 <h1 className="font-bold text-3xl lg:text-4xl">Recent Post</h1>
 
                 <div className="flex items-center gap-4 mt-6">
                   <div>
-                    <Image src={blogs.author} width={40} alt="author-profile" className="lg:w-14"></Image>
+                    <Image src={blogs.profile} width={40} alt="author-profile" className="lg:w-14"></Image>
                   </div>
                   <div>
-                    <p className="font-bold text-orange-500 lg:text-lg">{blogs.authorName}</p>
-                    <p className="text-sm">{blogs.publishedDate}</p>
+                    <p className="font-bold text-orange-500 lg:text-lg">{blogs.author}</p>
+                    <p className="text-sm">{blogs.date}</p>
                   </div>
                 </div>
                 {/* {recentBlog.image ? ( */}
@@ -82,7 +83,7 @@ const RecentPost = () => {
 
                     <div className="flex flex-col gap-4">
                       <div>
-                        <span className="font-light text-sm">{blogs.readLength}</span>
+                        <span className="font-light text-sm">{blogs.readDuration}</span>
                       </div>
                       <div className="flex gap-2 items-center flex-wrap">
                         <p>Tags:</p>

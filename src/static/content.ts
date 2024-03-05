@@ -124,7 +124,8 @@ export const Content2 = [
       "Data Structure",
       "Computer Science",
       "Productivity"
-    ]
+    ],
+    recent: true
   },
   {
     id: 1,
