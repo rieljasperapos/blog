@@ -18,20 +18,21 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
   return (
     <ScrollProvider>
       <MainWrapper>
-        <ResizablePanelGroup direction="horizontal">
+        <div className="items-center justify-center flex">
+        <ResizablePanelGroup direction="horizontal" className="max-w-screen-2xl">
           {/* LEFT SIDE PANEL */}
-          <ResizablePanel defaultSize={25} className="hidden xl:flex">
-            <div className="fixed max-w-64">
+          <ResizablePanel defaultSize={25} className="hidden lg:flex">
+            <div className="ml-10 fixed max-w-64">
               <Blogs title={title} />
             </div>
           </ResizablePanel>
           {/* <ResizableHandle withHandle /> */}
 
           { /* CENTER PANEL */ }
-          <ResizablePanel defaultSize={50} className="md:px-12">
+          <ResizablePanel defaultSize={50}>
             {Content2.map((content, idx) => (
-              content.title === decodeURIComponent(title) ? (
-                <div key={idx} className="flex flex-col h-full gap-6 p-6">
+              content.title === title.replaceAll("-", " ") ? (
+                <div key={idx} className="flex flex-col h-full gap-6 px-6 xl:px-0">
                   <div>
                     <h1 className="font-extrabold text-3xl sm:text-5xl">{content.title}</h1>
                   </div>
@@ -52,9 +53,9 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
                   { /* CONTENT BODY */ }
                   <div className="flex flex-col max-w-3xl gap-12">
                     <div>
-                      {content.image ? (
+                      {content.headerImage ? (
                         <div>
-                          <Image src={content.image} alt="DSA"></Image>
+                          <Image src={content.headerImage} alt="DSA"></Image>
                         </div>
                       ) : (
                         ""
@@ -118,10 +119,10 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
         {/* <ResizableHandle withHandle /> */}
 
         { /* RIGHT PANEL */ }
-        <ResizablePanel defaultSize={25} className="hidden xl:flex">
+        <ResizablePanel defaultSize={25} className="hidden lg:flex">
           {Content2.map((content, idx) => (
-            content.title === decodeURIComponent(title) ? (
-              <div key={idx} className="ml-8 fixed max-w-64">
+            content.title === title.replaceAll("-", " ") ? (
+              <div key={idx} className="xl:ml-8 fixed max-w-64">
                 <Navigation title={content.title} />
               </div>
             ) : (
@@ -130,6 +131,7 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
           ))}
         </ResizablePanel>
       </ResizablePanelGroup>
+      </div>
     </MainWrapper>
     </ScrollProvider >
   )
