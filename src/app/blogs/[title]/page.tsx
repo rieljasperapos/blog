@@ -31,61 +31,61 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
           <ResizablePanel defaultSize={50} className="">
             {Content2.map((content, idx) => (
               content.title === title.replaceAll("-", " ") ? (
-                <div className="flex justify-center items-center">
-                <div key={idx} className="flex flex-col h-full gap-6 px-6 xl:px-0">
-                  <div>
-                    <h1 className="font-extrabold text-3xl sm:text-5xl">{content.title}</h1>
-                  </div>
-                  <div className="text-sm">
-                    <p>{content.date} · {content.readDuration}</p>
-                  </div>
-
-                  <div className="flex gap-4 items-center">
+                <div key={idx} className="flex justify-center items-center">
+                  <div className="flex flex-col h-full gap-6 px-6 xl:px-0">
                     <div>
-                      <Image src={profile} width={50} alt="profile" />
+                      <h1 className="font-extrabold text-3xl sm:text-5xl">{content.title}</h1>
                     </div>
-                    <div>
-                      <h1 className="text-orange-500 font-bold font-sm">{content.author}</h1>
-                      <p className="text-xs">Computer Science</p>
+                    <div className="text-sm">
+                      <p>{content.date} · {content.readDuration}</p>
                     </div>
-                  </div>
 
-                  { /* CONTENT BODY */ }
-                  <div className="flex flex-col gap-12">
-                    <div>
-                      {content.headerImage ? (
-                        <div>
-                          <Image src={content.headerImage} alt="content image" style={{ width: '100%', height: '100%' }} className="border"></Image>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                      {content.contents?.map((blog, idx) => (
-                        <div key={idx} className="flex flex-col">
-                          {blog.body.map((body, idx) => (
-                            <div key={idx} className="mt-12">
-                              <div>
-                                <Link href={`#${body.header}`}>
-                                  <h1 className="font-bold text-xl sm:text-3xl" id={body.header} style={{scrollMarginTop: '100px'}}>{body.header}</h1>
-                                </Link>
-                              </div>
-                              {body.paragraphs.map((paragraph, idx) => (
-                                <div key={idx} className="flex flex-col">
-                                  <p className="font-light my-4">{paragraph.paragraph}</p>
-                                  {paragraph.image ? (
-                                    <Image src={paragraph.image} alt="Body Image" style={{ width: '100%', height: '100%' }} />
-                                  ) : ""}
+                    <div className="flex gap-4 items-center">
+                      <div>
+                        <Image src={profile} width={50} alt="profile" />
+                      </div>
+                      <div>
+                        <h1 className="text-orange-500 font-bold font-sm">{content.author}</h1>
+                        <p className="text-xs">Computer Science</p>
+                      </div>
+                    </div>
+
+                    { /* CONTENT BODY */ }
+                    <div className="flex flex-col gap-12">
+                      <div>
+                        {content.headerImage ? (
+                          <div>
+                            <Image src={content.headerImage} alt="content image" style={{ width: '100%', height: '100%' }} className="border"></Image>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        {content.contents?.map((blog, idx) => (
+                          <div key={idx} className="flex flex-col">
+                            {blog.body.map((body, idx) => (
+                              <div key={idx} className="mt-12">
+                                <div>
+                                  <Link href={`#${body.header}`}>
+                                    <h1 className="font-bold text-xl sm:text-3xl" id={body.header} style={{scrollMarginTop: '100px'}}>{body.header}</h1>
+                                  </Link>
                                 </div>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                      ))}
+                                {body.paragraphs.map((paragraph, idx) => (
+                                  <div key={idx} className="flex flex-col">
+                                    <p className="font-light my-4">{paragraph.paragraph}</p>
+                                    {paragraph.image ? (
+                                      <Image src={paragraph.image} alt="Body Image" style={{ width: '100%', height: '100%' }} />
+                                    ) : ""}
+                                  </div>
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+
                     </div>
 
                   </div>
-
-                </div>
                 </div>
               ) : (
                 ""
