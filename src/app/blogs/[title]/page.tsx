@@ -11,26 +11,27 @@ import { Content2 } from "@/static/content";
 import Blogs from "@/components/blog-list";
 import Navigation from "@/components/navigation";
 import Link from "next/link";
-import { ScrollProvider } from "@/context/scroll.context";
+// import { ScrollProvider } from "@/context/scroll.context";
 import { BlogParams } from "@/types/blog-type";
 
 const BlogPage = ({ params: { title } }: BlogParams) => {
   return (
-    <ScrollProvider>
+    // <ScrollProvider>
       <MainWrapper>
-        <ResizablePanelGroup direction="horizontal" className="max-w-screen-2xl">
+        <ResizablePanelGroup direction="horizontal" className="max-w-screen-2xl mx-10">
           {/* LEFT SIDE PANEL */}
           <ResizablePanel defaultSize={25} className="hidden lg:flex">
-            <div className="ml-10 fixed max-w-64">
+            <div className="fixed max-w-64 xl:pl-6">
               <Blogs title={title} />
             </div>
           </ResizablePanel>
           {/* <ResizableHandle withHandle /> */}
 
           { /* CENTER PANEL */ }
-          <ResizablePanel defaultSize={50}>
+          <ResizablePanel defaultSize={50} className="">
             {Content2.map((content, idx) => (
               content.title === title.replaceAll("-", " ") ? (
+                <div className="flex justify-center items-center">
                 <div key={idx} className="flex flex-col h-full gap-6 px-6 xl:px-0">
                   <div>
                     <h1 className="font-extrabold text-3xl sm:text-5xl">{content.title}</h1>
@@ -50,11 +51,11 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
                   </div>
 
                   { /* CONTENT BODY */ }
-                  <div className="flex flex-col max-w-3xl gap-12">
+                  <div className="flex flex-col gap-12">
                     <div>
                       {content.headerImage ? (
                         <div>
-                          <Image src={content.headerImage} alt="DSA"></Image>
+                          <Image src={content.headerImage} alt="content image" style={{ width: '100%', height: '100%' }} className="border"></Image>
                         </div>
                       ) : (
                         ""
@@ -65,14 +66,14 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
                             <div key={idx} className="mt-12">
                               <div>
                                 <Link href={`#${body.header}`}>
-                                  <h1 className="font-bold text-xl sm:text-3xl" id={body.header}>{body.header}</h1>
+                                  <h1 className="font-bold text-xl sm:text-3xl" id={body.header} style={{scrollMarginTop: '100px'}}>{body.header}</h1>
                                 </Link>
                               </div>
                               {body.paragraphs.map((paragraph, idx) => (
                                 <div key={idx} className="flex flex-col">
                                   <p className="font-light my-4">{paragraph.paragraph}</p>
                                   {paragraph.image ? (
-                                    <Image src={paragraph.image} width={768} alt="Body Image" />
+                                    <Image src={paragraph.image} alt="Body Image" style={{ width: '100%', height: '100%' }} />
                                   ) : ""}
                                 </div>
                               ))}
@@ -84,6 +85,7 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
 
                   </div>
 
+                </div>
                 </div>
               ) : (
                 ""
@@ -121,7 +123,7 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
         <ResizablePanel defaultSize={25} className="hidden lg:flex">
           {Content2.map((content, idx) => (
             content.title === title.replaceAll("-", " ") ? (
-              <div key={idx} className="xl:ml-8 fixed max-w-64">
+              <div key={idx} className="xl:ml-20 fixed max-w-64">
                 <Navigation title={content.title} />
               </div>
             ) : (
@@ -131,7 +133,7 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
         </ResizablePanel>
       </ResizablePanelGroup>
     </MainWrapper>
-    </ScrollProvider >
+    // </ScrollProvider >
   )
 }
 
