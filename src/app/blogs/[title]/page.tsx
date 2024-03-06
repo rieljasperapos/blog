@@ -18,7 +18,7 @@ const BlogPage = ({ params: { title } }: BlogParams) => {
   return (
     // <ScrollProvider>
       <MainWrapper>
-        <ResizablePanelGroup direction="horizontal" className="max-w-screen-2xl mx-10">
+        <ResizablePanelGroup direction="horizontal" className="max-w-screen-2xl lg:mx-10">
           {/* LEFT SIDE PANEL */}
           <ResizablePanel defaultSize={25} className="hidden lg:flex">
             <div className="fixed max-w-64 xl:pl-6">
