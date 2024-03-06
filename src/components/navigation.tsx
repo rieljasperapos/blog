@@ -1,5 +1,5 @@
 "use client"
-import { useScrollContext } from '@/context/scroll.context';
+// import { useScrollContext } from '@/context/scroll.context';
 // import { Content } from '@/static/content';
 import { Content2 } from '@/static/content';
 import Link from 'next/link';
@@ -9,8 +9,7 @@ interface BlogProps {
 }
 
 const Navigation: React.FC<BlogProps> = ({ title }) => {
-  const { scrollToContent } = useScrollContext();
-
+  // const { scrollToContent } = useScrollContext();
   return (
     <nav>
       {Content2.map((content, idx) => (
@@ -27,11 +26,10 @@ const Navigation: React.FC<BlogProps> = ({ title }) => {
                       <li
                         key={idx}
                         className="hover:text-orange-500 cursor-pointer mb-2"
-                        onClick={() => scrollToContent(body.header)}
                       >
-                        <Link href={`#${body.header}`} scroll={false}>
+                        <a href={`#${body.header}`}>
                           <p className='text-sm'># {body.header}</p>
-                        </Link>
+                        </a>
                       </li>
                     ))
                   ))}
