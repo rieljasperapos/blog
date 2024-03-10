@@ -14,7 +14,7 @@ const BlogPosts = () => {
       <div className="grid flex-col gap-4 mt-16 lg:grid-cols-3 lg:gap-10 lg:max-w-5xl">
         {Content2.map((blogs) => (
             blogs.recent == false ? (
-              <div key={blogs.id} className="flex flex-col gap-4 cursor-pointer" onClick={() => handleClick(blogs.title)}>
+              <div key={blogs.id} className="flex flex-col gap-4 cursor-pointer group overflow-hidden" onClick={() => handleClick(blogs.title)}>
                 <div className="flex items-center gap-4 mt-6">
                   <div>
                     <Image src={blogs.profile} width={40} alt="author-profile"></Image>
@@ -25,13 +25,13 @@ const BlogPosts = () => {
                   </div>
                 </div>
 
-                <div>
+                <div className="group-hover:scale-110 transition duration-300 ease-in-out rounded-xl border">
                   <Image src={blogs.image} alt="recent-post" className="rounded-xl border" style={{ width: '100%', height: '100%' }}></Image>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <div>
-                    <h1 className="text-xl font-semibold text-orange-500 hover:underline">{blogs.title}</h1>
+                    <h1 className="text-xl font-semibold text-orange-500 group-hover:underline">{blogs.title}</h1>
                   </div>
                   <div>
                     <p>{blogs.description}</p>
