@@ -66,7 +66,7 @@ const RecentPost = () => {
                 </div>
                 {/* {recentBlog.image ? ( */}
                   <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 cursor-pointer group overflow-hidden" onClick={() => handleClick(blogs.title)}>
-                    <div className="group-hover:scale-105 transition ease-in">
+                    <div className="transition ease-in">
                         <Image src={blogs.image} width={1500} alt="recent-post" className="rounded-xl" style={{ height: '100%' }}></Image>
                     </div>
 

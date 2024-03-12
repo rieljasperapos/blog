@@ -25,7 +25,7 @@ const BlogPosts = () => {
                   </div>
                 </div>
 
-                <div className="group-hover:scale-110 transition duration-300 ease-in-out rounded-xl border">
+                <div className="transition duration-300 ease-in-out rounded-xl border">
                   <Image src={blogs.image} alt="recent-post" className="rounded-xl border" style={{ width: '100%', height: '100%' }}></Image>
                 </div>
 
