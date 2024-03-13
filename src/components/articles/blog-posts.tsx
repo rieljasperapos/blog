@@ -11,7 +11,7 @@ const BlogPosts = () => {
   return (
     <div className="mt-16 lg:mt-24">
       <h1 className="font-bold text-3xl lg:text-4xl">Articles</h1>
-      <div className="grid flex-col gap-4 mt-16 lg:grid-cols-3 lg:gap-10 lg:max-w-5xl">
+      <div className="grid flex-col gap-4 mt-12 lg:grid-cols-3 lg:gap-10 lg:max-w-5xl">
         {Content2.map((blogs) => (
             blogs.recent == false ? (
               <div key={blogs.id} className="flex flex-col gap-4 cursor-pointer group overflow-hidden" onClick={() => handleClick(blogs.title)}>
