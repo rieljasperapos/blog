@@ -21,7 +21,6 @@ const Drawer = () => {
   const navigate = useRouter();
 
   const handleClick = (title: string | undefined) => {
-    console.log(title);
     if (title === "/") {
       setCurrentURL('/');
       navigate.push('/');
