@@ -62,6 +62,7 @@ const BlogPage = async ({ params: { title } }: BlogParams) => {
                     width={50}
                     height={50}
                     alt="profile"
+                    priority={true}
                   />
                 </div>
                 <div>
