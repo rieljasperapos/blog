@@ -2,7 +2,7 @@ import Image from "next/image";
 import { client, urlFor } from "@/utils/sanity/client";
 import { Post } from "@/types/blog-type";
 import Link from "next/link";
-import { formattedDate } from "@/components/format-date";
+import { formattedDate } from "@/utils/helper/format-date";
 
 const RecentPost = async () => {
   const posts = await client.fetch<Post>(`*[_type == "post"] | order(publishedAt desc)[0] {

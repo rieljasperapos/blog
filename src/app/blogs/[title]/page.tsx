@@ -11,7 +11,7 @@ import { client, urlFor } from "@/utils/sanity/client";
 import { Post } from "@/types/blog-type";
 import { PortableText } from "next-sanity";
 import { myPortableTextComponents } from "@/utils/components/portable-component";
-import { formattedDate } from "@/components/format-date";
+import { formattedDate } from "@/utils/helper/format-date";
 
 const BlogPage = async ({ params: { title } }: BlogParams) => {
   const post =

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Post } from "@/types/blog-type";
 import { client, urlFor } from "@/utils/sanity/client";
-import { formattedDate } from "@/components/format-date";
+import { formattedDate } from "@/utils/helper/format-date";
 import Link from "next/link";
 
 const BlogPosts = async () => {
