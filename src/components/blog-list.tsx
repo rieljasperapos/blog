@@ -1,19 +1,14 @@
-"use client"
-import { BlogList } from "@/static/content";
-import { Content2 } from "@/static/content";
-import { useRouter } from "next/navigation";
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import Link from "next/link";
+import { client } from "@/utils/sanity/client";
+import { Post, BlogProps } from "@/types/blog-type";
 
-interface BlogProps {
-  title: string;
-}
+const Blogs: React.FC<BlogProps> = async ({ title }) => {
+  const blogs = await client.fetch<Post[]>(`*[_type == "post"] {
+    title,
+    "currentSlug": slug.current,
+  }`)
 
-const Blogs: React.FC<BlogProps> = ({ title }) => {
-  const navigate = useRouter();
-  const handleClick = (title: string) => {
-    navigate.push(`${title.replaceAll(" ", "-")}`)
-  }
   return (
     <>
       <div className="cursor-pointer flex flex-col gap-4">
@@ -23,14 +18,14 @@ const Blogs: React.FC<BlogProps> = ({ title }) => {
         </Link>
         <h1 className="font-bold text-lg">Blog Posts</h1>
         <ul>
-          {Content2.map((blog, idx) => (
-            <li 
-              key={idx} 
-              className={`${blog.title === title.replaceAll("-", " ") ? "text-orange-500" : ""} mb-2 hover:text-orange-500 hover:underline text-sm`}
-              onClick={() => handleClick(blog.title)}
-              >
-                {blog.title}
-            </li>
+          {blogs.map((blog, idx) => (
+            <Link key={idx} href={`${blog.currentSlug}`}>
+              <li 
+                className={`${blog.currentSlug === title ? "text-orange-500" : ""} mb-2 hover:text-orange-500 hover:underline text-sm`}
+                >
+                  {blog.title}
+              </li>
+            </Link>
           ))}
         </ul>
       </div>

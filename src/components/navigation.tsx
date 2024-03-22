@@ -1,62 +1,45 @@
-"use client"
-// import { useScrollContext } from '@/context/scroll.context';
-// import { Content } from '@/static/content';
-import { Content2 } from '@/static/content';
-import Link from 'next/link';
+import { client } from "@/utils/sanity/client";
+import { Post, BlogProps } from "@/types/blog-type";
 
-interface BlogProps {
-  title: string;
-}
+const Navigation: React.FC<BlogProps> = async ({ title }) => {
+  const headerTitle =
+    await client.fetch<Post>(`*[_type == "post" && slug.current == "${title}"][0] {
+    "bodyStyle": body[],
+    title,
+  }`);
 
-const Navigation: React.FC<BlogProps> = ({ title }) => {
-  // const { scrollToContent } = useScrollContext();
   return (
     <nav>
-      {Content2.map((content, idx) => (
-        content.title === title.replaceAll("-", " ") ? (
-          <div key={idx}>
-            <div className="mb-4">
-              <h1 className="font-semibold">{content.title}</h1>
-            </div>
-            <div>
-              <ul className="border-l">
-                <div className="ml-4" key={idx}>
-                  {content.contents?.map((content, idx) => (
-                    content.body.map((body, idx) => (
-                      <li
-                        key={idx}
-                        className="hover:text-orange-500 cursor-pointer mb-2"
-                      >
-                        <a href={`#${body.header}`}>
-                          <p className='text-sm'># {body.header}</p>
-                        </a>
-                      </li>
-                    ))
-                  ))}
-                </div>
-                {/* {Content.content.map((content) => (
-              <div className="ml-4 mb-2" key={content.header}>
-                <li
-                  className="hover:text-orange-500 cursor-pointer"
-                  onClick={() => scrollToContent(content.header)}
-                >
-                  <Link href={`#${content.header}`} scroll={false}>
-                    <p className='text-sm'># {content.header}</p>
-                  </Link>
-                </li>
-              </div>
-            ))} */}
-              </ul>
-            </div>
-          </div>
-        ) : (
-          ""
-        )
-      ))}
       <div>
+        <div className="mb-4">
+          <h1 className="font-semibold">{headerTitle.title}</h1>
+        </div>
+        <div>
+          <ul className="border-l">
+            {headerTitle?.bodyStyle.map((content, idx) => (
+              <div key={idx} className="ml-4">
+                {content.style === "h1" ? (
+                  content.children?.map((childContent, idx) => (
+                    <li
+                      key={idx}
+                      className="hover:text-orange-500 cursor-pointer mb-2"
+                    >
+                      <a href={`#${childContent.text}`}>
+                        <p className="text-sm"># {childContent.text}</p>
+                      </a>
+                    </li>
+                  ))
+                ) : (
+                  ""
+                )}
+              </div>
+            ))}
+          </ul>
+        </div>
       </div>
     </nav>
   );
 };
 
+export const dynamic = "force-dynamic";
 export default Navigation;

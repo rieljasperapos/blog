@@ -2,14 +2,41 @@ export interface BlogParams {
   params: {
     title: string
   }
-}
+};
 
-export interface IBlog {
-  // TODO: Write blog types here
+export interface BlogProps {
+  title: string;
+};
+
+interface Category {
   title: string,
-  description: string,
-  author: string,
-  readDuration: string,
-  image: string,
-  [key: string]: any
-}
+};
+
+interface Body {
+  style: string,
+  children?: [
+    {
+      text: string,
+    }
+  ],
+};
+
+interface Author {
+  name: string,
+  image: any
+};
+
+export type Post = {
+  _id: string,
+  author: Author,
+  title: string,
+  currentSlug?: string,
+  body?: any,
+  categories: [Category],
+  _createdAt: string,
+  publishedAt: string,
+  mainImage?: any,
+  description?: string,
+  readDuration?: string,
+  bodyStyle: [Body],
+};

@@ -1,138 +1,73 @@
-"use client"
 import Image from "next/image";
-import { BlogList } from "@/static/content";
-import { Content2 } from "@/static/content";
-import { useRouter } from "next/navigation";
-import { IBlog } from "@/types/blog-type";
-import { useEffect, useState } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { client, urlFor } from "@/utils/sanity/client";
+import { Post } from "@/types/blog-type";
+import Link from "next/link";
+import { formattedDate } from "@/components/format-date";
 
-const initialValue: IBlog = {
-  title: "",
-  author: "",
-  description: "",
-  readDuration: "",
-  image: "",
-};
-
-const RecentPost = () => {
-  const [recentBlog, setRecentBlog] = useState<IBlog>(initialValue);
-  const navigate = useRouter();
-
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/blog-recent", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //   })
-  //   .then((res) => {
-  //     if (!res.ok) {
-  //       throw new Error(`Error ${res.status}`);
-  //     }
-  //     return res.json();
-  //   })
-  //   .then((data) => {
-  //     if (data.valid) {
-  //       setRecentBlog(data.blog[0]);
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log(`error`);
-  //   })
-  // }, [])
-
-  const handleClick = (title: string) => {
-    navigate.push(`/blogs/${title.replaceAll(" ", "-")}`);
-  }
-
-  console.log(recentBlog);
+const RecentPost = async () => {
+  const posts = await client.fetch<Post>(`*[_type == "post"] | order(publishedAt desc)[0] {
+    title,
+    "currentSlug": slug.current,
+    body,
+    description,
+    _createdAt,
+    publishedAt,
+    readDuration,
+    mainImage,
+    author->,
+    categories[]->,
+  }`)
 
   return (
     <>
-        {Content2.map((blogs) => (
-            blogs.recent &&
-              <div key={blogs.id} className="flex flex-col gap-4 lg:gap-8 lg:max-w-5xl">
-                <h1 className="font-bold text-3xl lg:text-4xl">Recent Post</h1>
+      <div className="flex flex-col gap-4 lg:gap-8 lg:max-w-5xl">
+        <h1 className="font-bold text-3xl lg:text-4xl">Recent Post</h1>
 
-                <div className="flex items-center gap-4 mt-6">
-                  <div>
-                    <Image src={blogs.profile} width={40} alt="author-profile" className="lg:w-14"></Image>
-                  </div>
-                  <div>
-                    <p className="font-bold text-orange-500 lg:text-lg">{blogs.author}</p>
-                    <p className="text-sm">{blogs.date}</p>
-                  </div>
+        <div className="flex items-center gap-4 mt-6">
+          <div>
+            <Image src={urlFor(posts.author.image).url()} width={40} height={40} alt="author-profile" className="lg:w-14"></Image>
+          </div>
+          <div>
+            <p className="font-bold text-orange-500 lg:text-lg">{posts.author.name}</p>
+            <p className="text-sm">{formattedDate(posts.publishedAt)}</p>
+          </div>
+        </div>
+
+        <Link href={`blogs/${posts.currentSlug}`}>
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 cursor-pointer group overflow-hidden">
+            <div>
+              <Image src={urlFor(posts.mainImage).url()} width={1500} height={1000} alt="recent-post" className="rounded-xl" style={{ height: '100%' }}></Image>
+            </div>
+
+            <div className="flex flex-col gap-4 justify-center">
+
+              <div className="flex flex-col gap-2">
+                <div>
+                  <h1 className="text-xl lg:text-3xl font-semibold text-orange-500 group-hover:underline">{posts.title}</h1>
                 </div>
-                {/* {recentBlog.image ? ( */}
-                  <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 cursor-pointer group overflow-hidden" onClick={() => handleClick(blogs.title)}>
-                    <div className="transition ease-in">
-                        <Image src={blogs.image} width={1500} alt="recent-post" className="rounded-xl" style={{ height: '100%' }}></Image>
-                    </div>
-
-                    <div className="flex flex-col gap-4 justify-center">
-
-                      <div className="flex flex-col gap-2">
-                        <div>
-                          <h1 className="text-xl lg:text-3xl font-semibold text-orange-500 group-hover:underline">{blogs.title}</h1>
-                        </div>
-                        <div>
-                          <p className="lg:text-xl">{blogs.description}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-4">
-                        <div>
-                          <span className="font-light text-sm">{blogs.readDuration}</span>
-                        </div>
-                        <div className="flex gap-2 items-center flex-wrap">
-                          <p>Tags:</p>
-                          {blogs.tags.map((tag, idx) => (
-                            <p key={idx} className="border border-orange-200 py-1 px-3 text-sm lg:py-2 lg:px-4">{tag}</p>
-                          ))}
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                {/* ) : ( */}
-                  {/* <div className="flex flex-col lg:flex-row gap-4 lg:gap-12 justify-evenly cursor-pointer" onClick={() => handleClick(blogs.title)}>
-                    <div>
-                        <Skeleton className="lg:w-[400px] h-96 rounded-xl"></Skeleton>
-                    </div>
-
-                    <div className="flex flex-col gap-4 justify-center">
-
-                      <div className="flex flex-col gap-2">
-                        <div>
-                          <Skeleton className="lg:w-[500px] h-8 mb-2"></Skeleton>
-                          <Skeleton className="lg:w-[500px] h-8 mb-2"></Skeleton>
-                        </div>
-                        <div>
-                          <Skeleton className="lg:w-[500px] h-24"></Skeleton>
-                          <Skeleton className="lg:w-[500px] h-24"></Skeleton>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-4">
-                        <div>
-                          <Skeleton className="w-[150px] h-4"></Skeleton>
-                        </div>
-                        <div className="flex gap-2 items-center flex-wrap">
-                          <Skeleton className="lg:w-[60px] w-[40px] h-6"></Skeleton>
-                          {blogs.tags.map((tag, idx) => (
-                            <Skeleton key={idx} className="w-[100px] h-6 lg:h-10 py-1 px-2 lg:py-2 lg:px-4"></Skeleton>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-                {/* )} */}
-                
+                <div>
+                  <p className="lg:text-xl">{posts.description}</p>
+                </div>
               </div>
-        ))}
+
+              <div className="flex flex-col gap-4">
+                <div>
+                  <span className="font-light text-sm">{posts.readDuration}</span>
+                </div>
+                <div className="flex gap-2 items-center flex-wrap">
+                  <p>Tags:</p>
+                  {posts.categories.map((tag, idx) => (
+                    <p key={idx} className="border border-orange-200 py-1 px-3 text-sm lg:py-2 lg:px-4">{tag.title}</p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
     </>
   );
 }
 
+export const dynamic = "force-dynamic";
 export default RecentPost;
