@@ -19,46 +19,70 @@ const BlogPosts = async () => {
 
   return (
     <div className="mt-16 lg:mt-24">
-      <h1 className="font-bold text-3xl lg:text-4xl">Articles</h1>
-      <div className="grid flex-col gap-4 mt-16 lg:grid-cols-3 lg:gap-10 lg:max-w-5xl">
+      <h1 className="font-bold text-2xl lg:text-3xl mb-10 bg-gradient-to-r from-orange-500 via-rose-500 to-pink-500 bg-clip-text text-transparent">
+        All Articles
+      </h1>
+      <div className="grid flex-col gap-6 mt-8 lg:grid-cols-2 lg:gap-8">
         {posts.map((blogs, idx) => (
           <Link key={idx} href={`blogs/${blogs.currentSlug}`}>
-            <div className="flex flex-col gap-4 cursor-pointer group overflow-hidden">
-              <div className="flex items-center gap-4 mt-6">
-                <div>
-                  <Image src={urlFor(blogs.author.image).url()} width={40} height={40} alt="author-profile"></Image>
-                </div>
-                <div>
-                  <p className="font-bold text-orange-500">{blogs.author.name}</p>
-                  <p className="text-sm">{formattedDate(blogs.publishedAt)}</p>
-                </div>
-              </div>
-              
-              <div className="transition duration-300 ease-in-out rounded-xl border">
-                <Image src={urlFor(blogs.mainImage).url()} width={500} height={500} alt="recent-post" className="rounded-xl border" style={{ width: '100%', height: '100%' }}></Image>
+            <article className="group h-[500px] relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-sm border border-white/10 hover:border-orange-500/20 transition-all duration-300">
+              {/* Image Container */}
+              <div className="h-[240px] w-full overflow-hidden">
+                <Image 
+                  src={urlFor(blogs.mainImage).url()} 
+                  width={500} 
+                  height={500} 
+                  alt="blog-post" 
+                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
 
-              <div className="flex flex-col gap-2">
-                <div>
-                  <h1 className="text-xl font-semibold text-orange-500 group-hover:underline">{blogs.title}</h1>
-                </div>
-                <div>
-                  <p>{blogs.description}</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-4">
-                <div>
-                  <span className="font-light text-sm">{blogs.readDuration}</span>
-                </div>
-                <div className="flex gap-2 items-center flex-wrap">
-                  <p>Tags:</p>
+              {/* Content Container */}
+              <div className="flex flex-col flex-1 gap-4 p-6">
+                {/* Categories */}
+                <div className="flex gap-2 flex-wrap">
                   {blogs.categories.map((tag, idx) => (
-                    <p key={idx} className="border border-orange-200 py-1 px-3 text-sm">{tag.title}</p>
+                    <span 
+                      key={idx} 
+                      className="text-xs font-medium px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20"
+                    >
+                      {tag.title}
+                    </span>
                   ))}
                 </div>
+
+                {/* Title and Description */}
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold group-hover:text-orange-500 transition-colors duration-300 mb-3">
+                    {blogs.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                    {blogs.description}
+                  </p>
+                </div>
+
+                {/* Author and Meta Info */}
+                <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-auto">
+                  <div className="flex items-center gap-3">
+                    <Image 
+                      src={urlFor(blogs.author.image).url()} 
+                      width={40} 
+                      height={40} 
+                      alt="author-profile" 
+                      className="rounded-full w-9 h-9 object-cover ring-2 ring-orange-500/20"
+                    />
+                    <div>
+                      <p className="font-medium text-sm text-orange-400">{blogs.author.name}</p>
+                      <p className="text-xs text-gray-500">{formattedDate(blogs.publishedAt)}</p>
+                    </div>
+                  </div>
+                  
+                  <span className="text-xs px-3 py-1.5 rounded-full bg-white/5 text-gray-400 font-medium">
+                    {blogs.readDuration}
+                  </span>
+                </div>
               </div>
-            </div>
+            </article>
           </Link>
         ))}
       </div>

@@ -19,53 +19,72 @@ const RecentPost = async () => {
   }`)
 
   return (
-    <>
-      <div className="flex flex-col gap-4 lg:gap-8 lg:max-w-5xl">
-        <h1 className="font-bold text-3xl lg:text-4xl">Recent Post</h1>
+    <div className="w-full">
+      <h2 className="font-bold text-2xl lg:text-3xl mb-10 bg-gradient-to-r from-orange-500 via-rose-500 to-pink-500 bg-clip-text text-transparent">
+        Featured Post
+      </h2>
 
-        <div className="flex items-center gap-4 mt-6">
-          <div>
-            <Image src={urlFor(posts.author.image).url()} width={40} height={40} alt="author-profile" className="lg:w-14"></Image>
+      <Link href={`blogs/${posts.currentSlug}`}>
+        <article className="group relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-b from-white/10 to-transparent backdrop-blur-sm border border-white/10 hover:border-orange-500/20 transition-all duration-300">
+          {/* Image Container */}
+          <div className="aspect-[16/9] w-full overflow-hidden">
+            <Image 
+              src={urlFor(posts.mainImage).url()} 
+              width={1500} 
+              height={1000} 
+              alt="featured-post" 
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+            />
           </div>
-          <div>
-            <p className="font-bold text-orange-500 lg:text-lg">{posts.author.name}</p>
-            <p className="text-sm">{formattedDate(posts.publishedAt)}</p>
-          </div>
-        </div>
 
-        <Link href={`blogs/${posts.currentSlug}`}>
-          <div className="grid lg:grid-cols-2 gap-4 lg:gap-16 cursor-pointer group overflow-hidden">
-            <div>
-              <Image src={urlFor(posts.mainImage).url()} width={1500} height={1000} alt="recent-post" className="rounded-xl" style={{ height: '100%' }}></Image>
+          {/* Content Container */}
+          <div className="flex flex-col gap-6 p-6">
+            {/* Categories */}
+            <div className="flex gap-2 flex-wrap">
+              {posts.categories.map((tag, idx) => (
+                <span 
+                  key={idx} 
+                  className="text-xs font-medium px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20"
+                >
+                  {tag.title}
+                </span>
+              ))}
             </div>
 
-            <div className="flex flex-col gap-4 justify-center">
+            {/* Title and Description */}
+            <div className="space-y-3">
+              <h3 className="text-xl lg:text-2xl font-bold group-hover:text-orange-500 transition-colors duration-300">
+                {posts.title}
+              </h3>
+              <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">
+                {posts.description}
+              </p>
+            </div>
 
-              <div className="flex flex-col gap-2">
+            {/* Author and Meta Info */}
+            <div className="flex items-center justify-between pt-4 border-t border-white/10">
+              <div className="flex items-center gap-3">
+                <Image 
+                  src={urlFor(posts.author.image).url()} 
+                  width={40} 
+                  height={40} 
+                  alt="author-profile" 
+                  className="rounded-full w-9 h-9 object-cover ring-2 ring-orange-500/20"
+                />
                 <div>
-                  <h1 className="text-xl lg:text-3xl font-semibold text-orange-500 group-hover:underline">{posts.title}</h1>
-                </div>
-                <div>
-                  <p className="lg:text-xl">{posts.description}</p>
+                  <p className="font-medium text-sm text-orange-400">{posts.author.name}</p>
+                  <p className="text-xs text-gray-500">{formattedDate(posts.publishedAt)}</p>
                 </div>
               </div>
-
-              <div className="flex flex-col gap-4">
-                <div>
-                  <span className="font-light text-sm">{posts.readDuration}</span>
-                </div>
-                <div className="flex gap-2 items-center flex-wrap">
-                  <p>Tags:</p>
-                  {posts.categories.map((tag, idx) => (
-                    <p key={idx} className="border border-orange-200 py-1 px-3 text-sm lg:py-2 lg:px-4">{tag.title}</p>
-                  ))}
-                </div>
-              </div>
+              
+              <span className="text-xs px-3 py-1.5 rounded-full bg-white/5 text-gray-400 font-medium">
+                {posts.readDuration}
+              </span>
             </div>
           </div>
-        </Link>
-      </div>
-    </>
+        </article>
+      </Link>
+    </div>
   );
 }
 
